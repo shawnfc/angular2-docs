@@ -2,5 +2,6 @@
 <project version="4">
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$/angular-quickstart" libraries="{angular2-docs/angular-quickstart/node_modules}" />
+    <file url="file://$PROJECT_DIR$/angular-tour-of-heroes" libraries="{angular2-docs/angular-tour-of-heroes/node_modules}" />
   </component>
 </project>
