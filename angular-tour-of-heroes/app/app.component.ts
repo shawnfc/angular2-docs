@@ -1,33 +1,34 @@
-// Root Component
-
 import {Component} from '@angular/core';
+import {Hero} from './hero';
 
-// start with one hero
-export class Hero {
-    id: number;
-    name: string;
-}
+// Data to be used
+const HEROES: Hero[] = [
+    {id: 11, name: 'Mr. Nice'},
+    {id: 12, name: 'Narco'},
+    {id: 13, name: 'Bombasto'},
+    {id: 14, name: 'Celeritas'},
+    {id: 15, name: 'Magneta'},
+    {id: 16, name: 'RubberMan'},
+    {id: 17, name: 'Dynama'},
+    {id: 18, name: 'Dr IQ'},
+    {id: 19, name: 'Magma'},
+    {id: 20, name: 'Tornado'}
+];
 
 @Component({
     selector: 'my-app',
     template: `
                 <h1>{{title}}</h1>
-                <h2>{{hero.name}} details!</h2>
-                <div><label>id: </label>{{hero.id}}</div>
                 
-                <div>
-                    <label>name: </label>
-                    <!--Remember the FormsModule is needed to two-way bind this input-->
-                    <input [(ngModel)]="hero.name" placeholder="name">
-                </div>
                 <h2>My Heroes</h2>
                 <ul class="heroes">
-                    <li *ngFor="let hero of heroes">
+                    <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
                         <span class="badge">{{hero.id}}</span> {{hero.name}}
                     </li>
                 </ul>
+                <my-hero-detail [hero]="selectedHero"></my-hero-detail>
                 `,
-    styles:     [`
+    styles: [`
                   .selected {
                     background-color: #CFD8DC !important;
                     color: white;
@@ -76,32 +77,21 @@ export class Hero {
                     border-radius: 4px 0 0 4px;
                   }
                 `]
-
 })
 
 export class AppComponent {
 
     title = 'Tour of Heroes';
-    // make the hero property reference the class created above
-    hero: Hero = {
-        id: 1,
-        name: 'Windstorm'
-    };
 
     // create a public property - reference to the data
     heroes = HEROES;
-}
 
-const HEROES: Hero[] = [
-    { id: 11, name: 'Mr. Nice' },
-    { id: 12, name: 'Narco' },
-    { id: 13, name: 'Bombasto' },
-    { id: 14, name: 'Celeritas' },
-    { id: 15, name: 'Magneta' },
-    { id: 16, name: 'RubberMan' },
-    { id: 17, name: 'Dynama' },
-    { id: 18, name: 'Dr IQ' },
-    { id: 19, name: 'Magma' },
-    { id: 20, name: 'Tornado' }
-];
+    // selectedHero uses the Hero class
+    selectedHero: Hero;
+
+    // when selected, the details of this will be shown
+    onSelect(hero: Hero): void {
+        this.selectedHero = hero;
+    }
+}
 
